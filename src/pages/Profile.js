@@ -66,6 +66,7 @@ function Profile() {
           </p>
         </div>
         <div className="profileCard">
+          <label htmlFor="name">user:</label>
           <input
             type="text"
             id="name"
@@ -74,16 +75,31 @@ function Profile() {
             value={name}
             onChange={onChange}
           />
-          <hr />
-          <input
+          <hr
+            style={{
+              color: "#000",
+              backgroundColor: "#000",
+            }}
+          />
+          {/* <input
             type="text"
             id="email"
             // className={!changeDetails ? "profileEmail" : "profileEmailActive"}
-            className="profileEmail"
+            
             // disabled={!changeDetails}
-            value={email}
+            // value={email}
             // onChange={onChange}
-          />
+          /> */}
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <label htmlFor="email">email:</label>
+            <p
+              className="profileEmail"
+              id="email"
+              style={{ fontWeight: "600" }}
+            >
+              {email}
+            </p>
+          </div>
         </div>
       </main>
     </div>
