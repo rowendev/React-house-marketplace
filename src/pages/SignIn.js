@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
 
@@ -12,7 +14,28 @@ function SignIn() {
 
   const { email, password } = formData;
   const navigate = useNavigate();
-  const onChange = (e) => {};
+  const onChange = (e) => {
+    setFormData((preState) => ({
+      ...preState,
+      [e.target.id]: e.target.value,
+    }));
+  };
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (userCredential.user) {
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("Email & Password not correct.");
+    }
+  };
   return (
     <>
       <div className="pageContainer">
@@ -20,7 +43,7 @@ function SignIn() {
           <p className="pageHeader">Welcome Back!</p>
         </header>
 
-        <form>
+        <form onSubmit={onSubmit}>
           <input
             type="email"
             className="emailInput"
@@ -59,6 +82,9 @@ function SignIn() {
           </div>
         </form>
         {/* google oauth */}
+        <Link to="/sign-up" className="registerLink">
+          Sign Up Instead
+        </Link>
       </div>
     </>
   );

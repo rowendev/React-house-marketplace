@@ -100,7 +100,10 @@ button {
   .listingDetails,
   .category,
   .explore {
-    margin: 3rem;
+    margin: 2rem 5rem;
+  }
+  .pageContainer {
+    margin: 5rem 20rem;
   }
 }
 
