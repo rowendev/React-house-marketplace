@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
 import OAuth from "../components/OAuth";
+import Spinner from "../components/Spinner";
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,6 +12,7 @@ function SignIn() {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const { email, password } = formData;
   const navigate = useNavigate();
@@ -21,8 +22,14 @@ function SignIn() {
       [e.target.id]: e.target.value,
     }));
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(
@@ -31,10 +38,16 @@ function SignIn() {
         password
       );
       if (userCredential.user) {
-        navigate("/");
+        setLoading(false);
+        navigate("/profile");
+        toast.success("歡迎回來!");
+        setTimeout(() => {
+          toast.info("建議使用本名,以便客戶聯絡");
+        }, 2000);
       }
     } catch (error) {
-      toast.error("Email & Password not correct.");
+      setLoading(false);
+      toast.error("Email/密碼輸入錯誤");
     }
   };
   return (
@@ -75,11 +88,8 @@ function SignIn() {
             Forgot Password?
           </Link>
 
-          <div className="signInBar">
-            <p className="signInText">Sign In</p>
-            <button className="signInButton">
-              <ArrowRightIcon fill="#fff" width="34px" height="34px" />
-            </button>
+          <div className="signDiv">
+            <button className="button-24">Sign In</button>
           </div>
         </form>
 

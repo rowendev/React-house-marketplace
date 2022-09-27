@@ -40,6 +40,7 @@ button {
   font-family: 'Montserrat', sans-serif;
   padding: 0 3rem;
   font-size: 1rem;
+  box-shadow: rgba(149, 149, 149, 0.2) 0px 1px 1px 0px;
 }
 @media (min-width: 1100px) {
   .input,
@@ -59,7 +60,7 @@ button {
 
 .primaryButton {
   cursor: pointer;
-  background: #00cc66;
+  background: #ff8325;
   border-radius: 1rem;
   padding: 0.85rem 2rem;
   color: #ffffff;
@@ -70,6 +71,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.primaryButton:hover{
+  background-color: #ff8325c4;
 }
 
 .removeIcon {
@@ -124,7 +128,7 @@ button {
   width: 64px;
   height: 64px;
   border: 8px solid;
-  border-color: #00cc66 transparent #00cc66 transparent;
+  border-color: #ff8325c4 transparent #ff8325c4 transparent;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
@@ -138,7 +142,7 @@ button {
 }
 
 .pageHeader {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 800;
 }
 
@@ -216,58 +220,52 @@ button {
 
 .forgotPasswordLink {
   cursor: pointer;
-  color: #00cc66;
+  color: #ff8325c4;
   font-weight: 600;
   text-align: right;
   text-decoration: underline;
 }
 
-.signInBar,
-.signUpBar {
-  margin-top: 1rem;
+.signDiv {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  position: inherit;
-}
-
-.signInButton,
-.signUpButton,
-.signInText,
-.signUpText {
-  cursor: pointer;
-  
-}
-@media (min-width: 1024px) {
-  .signInBar,
-  .signUpBar {
-    justify-content: start;
-  }
-}
-
-.signInText,
-.signUpText {
-  font-size: 1.5rem;
-  font-weight: 700;
-  
-}
-
-.signInButton,
-.signUpButton {
-  display: flex;
   justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.button-24 {
+  background: #ff8325;
+  border: 1px solid #ff8325;
+  border-radius: 0.5rem;
+ 
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  
+  text-align: center;
+  
+  touch-action: manipulation;
+  
+  font-size: 1.5rem;
+  padding: 1rem 3rem;
+  display: flex;
   align-items: center;
-  width: 3rem;
-  height: 3rem;
-  background-color: #00cc66;
-  border-radius: 50%;
+  justify-content: center;
 }
-@media (min-width: 1024px) {
-  .signInButton,
-  .signUpButton {
-    margin-left: 3rem;
-  }
+
+.button-24:hover,
+.button-24:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ff8325c4;
 }
+
+.button-24:active {
+  opacity: .5;
+}
+
 
 .socialLogin {
   margin-top: 1rem;
@@ -282,7 +280,7 @@ button {
   justify-content: center;
   align-items: center;
   padding: 0.75rem;
-  margin: 1.5rem;
+  
   width: 3rem;
   height: 3rem;
   background-color: #ffffff;
@@ -296,7 +294,7 @@ button {
 
 .registerLink {
   margin-top: 2rem;
-  color: #00cc66;
+  color: #ff8325;
   font-weight: 600;
   text-align: center;
   margin-bottom: 3rem;
@@ -317,11 +315,25 @@ button {
 .exploreHeading,
 .exploreCategoryHeading {
   font-weight: 700;
+  font-size: 1.3rem;
 }
 
 .exploreCategoryHeading {
-  margin-top: 3rem;
+  
+ 
+  position: relative;
 }
+/* .exploreCategoryHeading::before {
+  content: "";
+  position: absolute;
+  left: 9%;
+  bottom: 18px;
+  width: 3rem;
+  height: 14px;
+  transform: translateX(-50%);
+  background: rgba(87, 238, 127, 0.5);
+  z-index: -1;
+} */
 
 .swiper-container {
   min-height: 225px;
@@ -336,6 +348,7 @@ button {
   position: relative;
   width: 100%;
   height: 100%;
+  min-height: 20rem;
 }
 
 .swiperSlideImg {
@@ -363,7 +376,7 @@ button {
 .swiperSlidePrice {
   color: #000000;
   position: absolute;
-  top: 143px;
+  top: 15rem;
   left: 11px;
   font-weight: 600;
   max-width: 90%;
@@ -389,13 +402,14 @@ button {
   min-height: 115px;
   height: 15vw;
   width: 100%;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   object-fit: cover;
   margin: 0 auto;
 }
 
 .exploreCategoryName {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1rem;
   text-align: left;
 }
 
@@ -405,6 +419,8 @@ button {
 
 .categoryListings {
   padding: 0;
+  cursor: pointer;
+  margin: 0 0.5rem;
 }
 
 .categoryListing {
@@ -413,6 +429,13 @@ button {
   align-items: center;
   margin-bottom: 1rem;
   position: relative;
+  
+  border-radius: 0.8rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: all 0.3s ;
+}
+.categoryListing:hover {
+  background-color: #cacaca5a;
 }
 
 .categoryListingLink {
@@ -421,13 +444,13 @@ button {
 
 .categoryListingImg {
   width: 30%;
-  height: 100px;
-  border-radius: 1.5rem;
+  height: 150px;
+  border-radius: 0.8rem 0 0 0.8rem;
   object-fit: cover;
 }
 @media (min-width: 1024px) {
   .categoryListingImg {
-    width: 19%;
+    width: 20%;
     height: 217px;
   }
 }
@@ -443,22 +466,23 @@ button {
 
 .categoryListingLocation {
   font-weight: 600;
-  font-size: 0.7rem;
+  font-size: 1rem;
   opacity: 0.8;
+  margin-top: 0;
   margin-bottom: 0;
 }
 
 .categoryListingName {
   font-weight: 600;
   font-size: 1.25rem;
-  margin: 0;
+  margin: 0.3rem 0;
 }
 
 .categoryListingPrice {
   margin-top: 0.5rem;
   font-weight: 600;
   font-size: 1.1rem;
-  color: #00cc66;
+  color: #ff8409;
   margin-bottom: 0;
   display: flex;
   align-items: center;
@@ -466,13 +490,14 @@ button {
 
 .categoryListingInfoDiv {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   max-width: 275px;
 }
 
 .categoryListingInfoText {
-  font-weight: 500;
-  font-size: 0.7rem;
+  margin: 0.5rem 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .loadMore {
@@ -507,6 +532,9 @@ button {
   justify-content: center;
   align-items: center;
 }
+.shareIconDiv:hover {
+  background-color: #e1e1e1;
+}
 
 .listingName {
   font-weight: 600;
@@ -531,7 +559,7 @@ button {
 
 .listingType {
   padding: 0.25rem 0.5rem;
-  background-color: #00cc66;
+  background-color: #ff8325;
   color: #ffffff;
   border-radius: 2rem;
   display: inline;
@@ -558,7 +586,7 @@ button {
 
 .leafletContainer {
   width: 100%;
-  height: 200px;
+  height: 300px;
   overflow-x: hidden;
   margin-bottom: 3rem;
 }
@@ -617,8 +645,10 @@ button {
 }
 
 .profile {
-  margin-bottom: 10rem;
+  width: auto;
+  margin: 0 3rem 10rem 3rem;
 }
+
 
 .profileHeader {
   display: flex;
@@ -632,9 +662,13 @@ button {
   font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
-  background-color: #00cc66;
-  padding: 0.25rem 0.75rem;
+  background-color: #ff8325;
+  padding: 0.35rem 0.85rem;
   border-radius: 1rem;
+}
+.logOut:hover {
+  color:white;
+  background-color: #ff8325c4;
 }
 
 .profileDetailsHeader {
@@ -650,12 +684,16 @@ button {
 .changePersonalDetails {
   cursor: pointer;
   font-weight: 600;
-  color: #00cc66;
+  color: #ff8325;
 }
+.changePersonalDetails:hover {
+  
+  text-decoration: underline;
 
+}
 .profileCard {
   background-color: #ffffff;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   padding: 1rem;
   box-shadow: rgba(0, 0, 0, 0.2);
   max-width: 500px;
@@ -706,6 +744,10 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+.createListing:hover {
+  background-color: #cacaca;
 }
 
 .listingText {
@@ -721,10 +763,12 @@ button {
   font-weight: 600;
   margin-top: 1rem;
   display: block;
+  
 }
 
 .formButtons {
   display: flex;
+  
 }
 
 .formButton,
@@ -737,15 +781,17 @@ button {
   padding: 0.9rem 3rem;
   background-color: #ffffff;
   font-weight: 600;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   font-size: 1rem;
-  margin: 0.5rem 0.5rem 0 0;
+  margin: 1rem 1rem 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .formButtonActive {
-  background-color: #00cc66;
+  background-color: #ff8325;
   color: #ffffff;
 }
 
@@ -800,18 +846,23 @@ button {
   width: 100%;
 }
 .formInputFile::-webkit-file-upload-button {
-  background-color: #00cc66;
+  background-color: #ff8325;
   border: none;
   color: #ffffff;
   font-weight: 600;
   padding: 0.5rem 0.75rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   margin-right: 1rem;
+}
+.formInputFile::-webkit-file-upload-button:hover {
+  background-color: #ff8325c4;
 }
 
 .createListingButton {
   margin-top: 5rem;
+  background-color: #ff8325;
 }
+
 
 .offers {
   margin-bottom: 10rem;

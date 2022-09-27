@@ -8,12 +8,13 @@ import {
 } from "firebase/auth";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
-import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
 import OAuth from "../components/OAuth";
+import Spinner from "../components/Spinner";
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,8 +29,14 @@ function SignUp() {
       [e.target.id]: e.target.value,
     }));
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const auth = getAuth();
       const userCredential = await createUserWithEmailAndPassword(
@@ -46,9 +53,15 @@ function SignUp() {
       formDataCopy.timestamp = serverTimestamp();
       // update the database
       await setDoc(doc(db, "users", user.uid), formDataCopy);
-      navigate("/");
+      setLoading(false);
+      navigate("/profile");
+      toast.success("歡迎使用!");
+      setTimeout(() => {
+        toast.info("建議使用本名,以便客戶聯絡");
+      }, 2000);
     } catch (error) {
-      toast.error("Something went wrong...");
+      setLoading(false);
+      toast.error("未知的錯誤...");
     }
   };
   return (
@@ -94,11 +107,8 @@ function SignUp() {
             />
           </div>
 
-          <div className="signUpBar">
-            <p className="signUpText">Sign Up</p>
-            <button className="signUpButton">
-              <ArrowRightIcon fill="#fff" width="34px" height="34px" />
-            </button>
+          <div className="signDiv">
+            <button className="button-24">Sign Up</button>
           </div>
         </form>
         <OAuth />

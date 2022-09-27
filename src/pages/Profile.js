@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { getAuth, updateProfile } from "firebase/auth";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
+import arrowRight from "../assets/svg/keyboardArrowRightIcon.svg";
+import homeIcon from "../assets/svg/homeIcon.svg";
 
 function Profile() {
   const auth = getAuth();
@@ -46,9 +48,9 @@ function Profile() {
   return (
     <div className="profile">
       <header className="profileHeader">
-        <p className="pageHeader">My Profile</p>
+        <p className="pageHeader">使用者資訊</p>
         <button type="button" className="logOut" onClick={onLogout}>
-          Log out
+          登出
         </button>
       </header>
 
@@ -62,11 +64,11 @@ function Profile() {
               setChangeDetails((prevState) => !prevState);
             }}
           >
-            {changeDetails ? "done" : "change"}
+            {changeDetails ? "確認" : "更改用戶資料"}
           </p>
         </div>
         <div className="profileCard">
-          <label htmlFor="name">user:</label>
+          <label htmlFor="name">使用者名稱:</label>
           <input
             type="text"
             id="name"
@@ -91,7 +93,7 @@ function Profile() {
             // onChange={onChange}
           /> */}
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <label htmlFor="email">email:</label>
+            <label htmlFor="email">Email:</label>
             <p
               className="profileEmail"
               id="email"
@@ -101,6 +103,11 @@ function Profile() {
             </p>
           </div>
         </div>
+        <Link to="/create-listing" className="createListing">
+          <img src={homeIcon} alt="home" />
+          <p>刊登您的物件</p>
+          <img src={arrowRight} alt="arrowright" />
+        </Link>
       </main>
     </div>
   );

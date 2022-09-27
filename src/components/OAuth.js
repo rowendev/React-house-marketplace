@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 import googleIcon from "../assets/svg/googleIcon.svg";
+import Spinner from "../components/Spinner";
 
 function OAuth() {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  if (loading) {
+    return <Spinner />;
+  }
   const onGoogleClick = async () => {
+    setLoading(true);
     try {
       const auth = getAuth();
       const provider = new GoogleAuthProvider();
@@ -26,9 +32,15 @@ function OAuth() {
           timestamp: serverTimestamp(),
         });
       }
-      navigate("/");
+      setLoading(false);
+      navigate("/profile");
+      toast.success("歡迎使用!");
+      setTimeout(() => {
+        toast.info("建議使用本名,以便客戶聯絡");
+      }, 2000);
     } catch (error) {
-      toast.error("Could not authorize with Google");
+      setLoading(false);
+      toast.error("無法使用Google登入");
     }
   };
   return (
