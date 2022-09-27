@@ -350,6 +350,7 @@ button {
   height: 100%;
   min-height: 20rem;
   border-radius: 1rem;
+  cursor: pointer;
 }
 
 .swiperSlideImg {
@@ -505,7 +506,7 @@ button {
 .categoryListingInfoText {
   margin: 0.5rem 0.5rem;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 
 .loadMore {
@@ -655,6 +656,12 @@ button {
 .profile {
   width: auto;
   margin: 0 1rem 10rem 1rem;
+}
+@media (min-width:1440px) {
+  .profile{
+    margin: 0 3rem 10rem 3rem;
+  }
+  
 }
 
 

@@ -17,6 +17,7 @@ import "swiper/css/a11y";
 
 // import required modules
 import { Pagination, Navigation, Scrollbar, A11y } from "swiper";
+import { toast } from "react-toastify";
 
 function Listing() {
   const [listing, setListing] = useState(null);
@@ -36,6 +37,8 @@ function Listing() {
         setListing(docSnap.data());
         setLoading(false);
       } else {
+        setLoading(false);
+        toast.error("此物件已不存在");
       }
     };
 
