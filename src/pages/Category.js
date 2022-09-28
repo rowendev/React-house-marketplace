@@ -17,6 +17,10 @@ import ListingItem from "../components/ListingItem";
 function Category() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [lastFetchedListing, setLastFetchedListing] = useState(null);
+  // improvement
+  const [noMoreListings, setNoMoreListings] = useState(true);
+
   const params = useParams();
 
   useEffect(() => {
@@ -34,6 +38,10 @@ function Category() {
 
         // execute query
         const querySnap = await getDocs(q);
+
+        const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+        setLastFetchedListing(lastVisible);
+
         const listings = [];
         querySnap.forEach((doc) => {
           return listings.push({
@@ -44,12 +52,47 @@ function Category() {
         setListings(listings);
         setLoading(false);
       } catch (error) {
-        toast.error("Could not fetch data");
+        toast.error("無法載入資料");
       }
     };
 
     fetchListings();
   }, [params.categoryName]);
+
+  // pagination / load more
+  const fetchMoreListings = async () => {
+    try {
+      // get reference
+      const listingsRef = collection(db, "listings");
+      // create a query
+      const q = query(
+        listingsRef,
+        where("type", "==", params.categoryName),
+        orderBy("timestamp", "desc"),
+        startAfter(lastFetchedListing),
+        // next 10 listings
+        limit(10)
+      );
+
+      // execute query
+      const querySnap = await getDocs(q);
+      setNoMoreListings(querySnap.empty);
+      const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+      setLastFetchedListing(lastVisible);
+
+      const listings = [];
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+      setListings((prevState) => [...prevState, ...listings]);
+      setLoading(false);
+    } catch (error) {
+      toast.error("無法載入資料");
+    }
+  };
   return (
     <div className="category">
       <header>
@@ -72,6 +115,24 @@ function Category() {
               ))}
             </ul>
           </main>
+
+          <br />
+          <br />
+          {noMoreListings ? (
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "600",
+                fontWeight: "bold",
+              }}
+            >
+              沒有更多物件囉!
+            </p>
+          ) : (
+            <button className="primaryButton" onClick={fetchMoreListings}>
+              載入更多
+            </button>
+          )}
         </>
       ) : (
         <p>目前尚未有{params.categoryName === "rent" ? "出租" : "出售"}物件</p>
