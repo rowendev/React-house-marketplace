@@ -129,22 +129,27 @@ function Profile() {
           </p>
         </div>
         <div className="profileCard">
-          <label htmlFor="name">使用者名稱:</label>
-          <input
-            type="text"
-            id="name"
-            className={!changeDetails ? "profileName" : "profileNameActive"}
-            disabled={!changeDetails}
-            value={name}
-            onChange={onChange}
-          />
-          <hr
-            style={{
-              color: "#000",
-              backgroundColor: "#000",
-            }}
-          />
-          {/* <input
+          <div className="profileImg">
+            <img src={auth.currentUser.photoURL} alt="userImg" />
+          </div>
+
+          <div>
+            <label htmlFor="name">使用者名稱:</label>
+            <input
+              type="text"
+              id="name"
+              className={!changeDetails ? "profileName" : "profileNameActive"}
+              disabled={!changeDetails}
+              value={name}
+              onChange={onChange}
+            />
+            <hr
+              style={{
+                color: "#000",
+                backgroundColor: "#000",
+              }}
+            />
+            {/* <input
             type="text"
             id="email"
             // className={!changeDetails ? "profileEmail" : "profileEmailActive"}
@@ -153,15 +158,16 @@ function Profile() {
             // value={email}
             // onChange={onChange}
           /> */}
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <label htmlFor="email">Email:</label>
-            <p
-              className="profileEmail"
-              id="email"
-              style={{ fontWeight: "600" }}
-            >
-              {email}
-            </p>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <label htmlFor="email">Email:</label>
+              <p
+                className="profileEmail"
+                id="email"
+                style={{ fontWeight: "600" }}
+              >
+                {email}
+              </p>
+            </div>
           </div>
         </div>
         <Link to="/create-listing" className="createListing">

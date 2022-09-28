@@ -19,6 +19,7 @@ function Explore() {
   return (
     <div className="explore">
       <header>
+        <div className="orangeMarker"></div>
         <p className="pageHeader">瀏覽物件</p>
       </header>
       <main>

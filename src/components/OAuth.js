@@ -11,9 +11,11 @@ function OAuth() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
   if (loading) {
     return <Spinner />;
   }
+
   const onGoogleClick = async () => {
     setLoading(true);
     try {
