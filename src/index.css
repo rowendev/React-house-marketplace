@@ -715,6 +715,17 @@ button {
   justify-content: space-between;
   max-width: 500px;
 }
+.profileDetailsHeader::before {
+  content: "";
+  position: absolute;
+  margin: 1.7rem 0.6rem;
+  z-index: -1;
+  width: 8rem;
+  height: 0.7rem;
+  /* transform: translateX(-50%); */
+  background: rgba(255, 132, 45, 0.499);
+  z-index: -1;
+}
 
 .personalDetailsText {
   font-weight: 600;
@@ -802,6 +813,17 @@ button {
 .listingText {
   margin-top: 3rem;
   font-weight: 600;
+}
+.listingText::before {
+  content: "";
+  position: absolute;
+  margin: 0.8rem 0.5rem;
+  z-index: -1;
+  width: 6rem;
+  height: 0.7rem;
+  /* transform: translateX(-50%); */
+  background: rgba(255, 132, 45, 0.499);
+  z-index: -1;
 }
 
 .lisitingsList {
